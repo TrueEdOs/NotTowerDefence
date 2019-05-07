@@ -1,3 +1,4 @@
 class Controller:
-    def do(self, unit, all_units):
+    @staticmethod
+    def do(unit, all_units):
         pass
