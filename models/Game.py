@@ -1,4 +1,5 @@
 import pygame
+import config.settings as c
 
 from models.Box import Box
 from models.Controller import Controller
@@ -13,7 +14,7 @@ class Game:
         self.timer = 0
         self.wave_count = 0
         self.game_over = False
-        self.surface = pygame.display.set_mode((1000, 1000))
+        self.surface = pygame.display.set_mode((c.screen_width, c.screen_height))
         self.clock = pygame.time.Clock()
 
     def handle_player_events(self):
@@ -28,8 +29,8 @@ class Game:
             unit.action()
 
     def run(self):
-        self.units.append(Zombie(self, Controller(), 10, 50, 50))
-        self.units.append(Core(self, Controller(), 10, 500, 500))
+        self.units.append(Zombie(self, Controller(), 50, 50))
+        self.units.append(Core(self, Controller(), 500, 500))
         while not self.game_over:
             pygame.event.pump()
             self.handle_player_events()
