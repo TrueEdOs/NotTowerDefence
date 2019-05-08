@@ -1,19 +1,23 @@
 import pygame
+import config.settings as c
 
 from models.Box import Box
 from models.Controller import Controller
 from models.Core import Core
 from models.Zombie import Zombie
+from models.ZombieController import ZombieController
 
 
 class Game:
     def __init__(self):
-        pygame.init()
         self.units = []
         self.timer = 0
         self.wave_count = 0
         self.game_over = False
-        self.surface = pygame.display.set_mode((1000, 1000))
+        self.background_image = pygame.image.load(c.background_image)
+        pygame.init()
+        self.surface = pygame.display.set_mode((c.screen_width, c.screen_height))
+        pygame.display.set_caption("No Tower Defense")
         self.clock = pygame.time.Clock()
 
     def handle_player_events(self):
@@ -28,12 +32,15 @@ class Game:
             unit.action()
 
     def run(self):
-        self.units.append(Zombie(self, Controller(), 10, 50, 50))
-        self.units.append(Core(self, Controller(), 10, 500, 500))
+        self.units.append(Zombie(self, ZombieController(), 50, 50))
+        self.units.append(Core(self, Controller(), 500, 500))
         while not self.game_over:
-            pygame.event.pump()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    exit()
+            self.surface.blit(self.background_image, (0, 0))
             self.handle_player_events()
             self.handle_unit_actions()
             self.draw()
             pygame.display.update()
-            self.clock.tick(300)
+            self.clock.tick(c.fps)
