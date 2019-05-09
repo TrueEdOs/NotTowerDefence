@@ -1,10 +1,10 @@
 import pygame
-from models.GameObject import GameObject
+from units.Unit import Unit
 
 
-class Box(GameObject):
+class Box(Unit):
     def __init__(self, game, controller, hp, x, y, width, height, texture_path):
-        GameObject.__init__(self, game, controller, hp, x, y, width, height)
+        Unit.__init__(self, game, controller, hp, x, y, width, height)
         self.texture_path = texture_path
 
     def draw(self):

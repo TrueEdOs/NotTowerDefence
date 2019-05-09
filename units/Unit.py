@@ -1,7 +1,7 @@
 import pygame
 
 
-class GameObject:
+class Unit:
     def __init__(self, game, controller, hp, x, y, width, height):
         self.game = game
         self.hp = hp

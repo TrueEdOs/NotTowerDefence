@@ -1,4 +1,4 @@
-from models.Core import Core
+from units.Core import Core
 
 
 class ZombieController:

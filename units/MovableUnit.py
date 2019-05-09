@@ -1,10 +1,9 @@
-import math
+from units.Unit import Unit
 
-from models.GameObject import GameObject
 
-class MovableObject(GameObject):
+class MovableUnit(Unit):
     def __init__(self, game, controller, hp, x, y, width, height, speed):
-        GameObject.__init__(self, game, controller, hp, x, y, width, height)
+        Unit.__init__(self, game, controller, hp, x, y, width, height)
         self.speed = speed
 
     def step_to(self, to_x, to_y):
@@ -29,19 +28,17 @@ class MovableObject(GameObject):
         def intersects(obj):
             def is_inside(x, y, obj):
                 if obj.x < x < obj.x + obj.width and \
-                   obj.y < y < obj.y + obj.height:
+                        obj.y < y < obj.y + obj.height:
                     return True
                 return False
 
             if is_inside(self.x, self.y, obj) or \
-               is_inside(self.x + self.width, self.y, obj) or \
-               is_inside(self.x, self.y + self.height, obj) or \
-               is_inside(self.x + self.width, self.y + self.height, obj):
+                    is_inside(self.x + self.width, self.y, obj) or \
+                    is_inside(self.x, self.y + self.height, obj) or \
+                    is_inside(self.x + self.width, self.y + self.height, obj):
                 return True
             return False
 
         for unit in self.game.units:
             if intersects(unit):
                 return True
-
-

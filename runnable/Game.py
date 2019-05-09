@@ -1,11 +1,10 @@
 import pygame
 import config.settings as c
 
-from models.Box import Box
-from models.Controller import Controller
-from models.Core import Core
-from models.Zombie import Zombie
-from models.ZombieController import ZombieController
+from controllers.Controller import Controller
+from units.Core import Core
+from units.Zombie import Zombie
+from controllers.ZombieController import ZombieController
 
 
 class Game:
