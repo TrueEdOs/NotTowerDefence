@@ -14,7 +14,7 @@ class RunnableStack:
     def last_task(self):
         if len(self) == 0:
             return None
-        return self.tasks[len(self) - 1]
+        return self.tasks[-1]
 
     def is_empty(self):
         return len(self) == 0
