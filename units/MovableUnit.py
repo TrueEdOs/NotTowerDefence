@@ -1,44 +1,44 @@
+import Utils
 from units.Unit import Unit
+import math
 
 
 class MovableUnit(Unit):
-    def __init__(self, game, controller, hp, x, y, width, height, speed):
-        Unit.__init__(self, game, controller, hp, x, y, width, height)
+    def __init__(self, game_map, controller, hp, pos, width, height, speed, owner, name, unit_type):
+        Unit.__init__(self, game_map, controller, hp, pos, width, height, owner, name, unit_type)
         self.speed = speed
 
-    def step_to(self, to_x, to_y):
-        dx, dy = self.speed
-        if to_x < self.x:
-            self.x -= dx
+    def step_to(self, pos):
+        dx = abs(pos[0] - self.pos[0])
+        dy = abs(pos[1] - self.pos[1])
+        if dx != 0:
+            alpha = math.atan(dy / dx)
         else:
-            self.x += dx
-        if to_y < self.y:
-            self.y -= dy
-        else:
-            self.y += dy
+            alpha = math.pi
+        dx = math.cos(alpha) * self.speed
+        if self.pos[0] > pos[0]:
+            dx *= -1
+        if abs(dx) > abs(pos[0] - self.pos[0]):
+            dx = pos[0] - self.pos[0]
+        dy = math.sin(alpha) * self.speed
+        if abs(dy) > abs(pos[1] - self.pos[1]):
+            dy = pos[1] - self.pos[1]
+        if self.pos[1] > pos[1]:
+            dy *= -1
+        print(self.pos, pos, dx, dy)
+        self.pos = (self.pos[0] + dx, self.pos[1] + dy)
 
-    def move(self, to_x, to_y):
-        self.step_to(to_x, to_y)
+    def move(self, pos):
+        old_pos = (self.pos[0], self.pos[1])
+        self.step_to(pos)
         if self.is_blocked():
-            self.step_to(-to_x, -to_y)
+            print("AAAA")
+            self.step_to(old_pos)
             return False
         return True
 
     def is_blocked(self):
-        def intersects(obj):
-            def is_inside(x, y, obj):
-                if obj.x < x < obj.x + obj.width and \
-                        obj.y < y < obj.y + obj.height:
-                    return True
-                return False
-
-            if is_inside(self.x, self.y, obj) or \
-                    is_inside(self.x + self.width, self.y, obj) or \
-                    is_inside(self.x, self.y + self.height, obj) or \
-                    is_inside(self.x + self.width, self.y + self.height, obj):
+        for unit in self.game_map.units.values():
+            if self.is_collide(unit) and unit.is_collide(self) and Utils.is_intersected(self, unit):
                 return True
-            return False
-
-        for unit in self.game.units:
-            if intersects(unit):
-                return True
+        return False

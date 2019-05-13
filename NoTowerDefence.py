@@ -6,8 +6,8 @@ from runnable.MainMenu import MainMenu
 from runnable.TestMenu import TestMenu
 
 FPS = 60
-W = 800
-H = 600
+W = 1366
+H = 768
 
 pygame.init()
 sc = pygame.display.set_mode((W, H))

@@ -11,4 +11,4 @@ core_height = 100
 zombie_hp = 10
 zombie_width = 50
 zombie_height = 50
-zombie_speed = [1, 1]
+zombie_speed = 1

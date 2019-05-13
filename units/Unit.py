@@ -2,14 +2,20 @@ import pygame
 
 
 class Unit:
-    def __init__(self, game, controller, hp, x, y, width, height):
-        self.game = game
+    unit_id = 0
+
+    def __init__(self, game_map, controller, hp, pos, width, height, owner, name, unit_type):
+        self.game_map = game_map
         self.hp = hp
-        self.x = x
-        self.y = y
+        self.pos = pos
         self.width = width
         self.height = height
         self.controller = controller
+        self.owner = owner
+        self.name = name
+        self.unit_type = unit_type
+        self.id = Unit.unit_id
+        Unit.unit_id += 1
 
     @property
     def left(self):
@@ -31,10 +37,13 @@ class Unit:
         pass
 
     def action(self):
-        self.controller.do(self, self.game.units)
+        self.controller.do(self, self.game_map.units.values())
 
     def get_damage(self, value):
         self.hp -= value
 
     def get_healing(self, value):
         self.hp += value
+
+    def is_collide(self, to):
+        return False
