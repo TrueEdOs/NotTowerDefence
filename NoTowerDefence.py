@@ -5,6 +5,7 @@ from RunnableStack import RunnableStack
 from runnable.ControlButton import ControlButton
 from runnable.MainMenu import MainMenu
 from runnable.TestMenu import TestMenu
+from runnable.Authorization import Authorization
 
 FPS = 60
 W = 800
@@ -18,6 +19,7 @@ win = pygame.display.get_surface()
 
 
 # Game cycle
+
 runnable_stack = RunnableStack()
 runnable_stack.push(MainMenu(W, H, runnable_stack, color.brick))
 

@@ -1,45 +1,41 @@
 import pygame
+
+import Utils
 import config.settings as c
 
 from controllers.Controller import Controller
+from models.Map import Map
+from runnable.Runnable import Runnable
 from units.Core import Core
 from units.Zombie import Zombie
 from controllers.ZombieController import ZombieController
 
 
-class Game:
-    def __init__(self):
-        self.units = []
+class Game(Runnable):
+    def __init__(self, width, height, runnable_stack):
+        Runnable.__init__(self, width, height, runnable_stack)
         self.timer = 0
         self.wave_count = 0
         self.game_over = False
         self.background_image = pygame.image.load(c.background_image)
-        pygame.init()
-        self.surface = pygame.display.set_mode((c.screen_width, c.screen_height))
-        pygame.display.set_caption("No Tower Defense")
-        self.clock = pygame.time.Clock()
+        self.game_map = Map(width, height)
+        self.game_map.add_unit(Core(self.game_map, (300, 300)))
+        self.game_map.add_unit(Zombie(self.game_map, (100, 100)))
+        self.game_map.add_unit(Zombie(self.game_map, (100, 400)))
+        self.game_map.add_unit(Zombie(self.game_map, (600, 600)))
+        self.game_map.add_unit(Zombie(self.game_map, (300, 700)))
 
     def handle_player_events(self):
+        for event in self.events:
+            if event.type == pygame.QUIT:
+                self.runnable_stack.pop()
+
         pass
 
-    def draw(self):
-        for unit in self.units:
-            unit.draw()
+    def update_state(self):
+        self.game_map.step()
+        pass
 
-    def handle_unit_actions(self):
-        for unit in self.units:
-            unit.action()
-
-    def run(self):
-        self.units.append(Zombie(self, ZombieController(), 50, 50))
-        self.units.append(Core(self, Controller(), 500, 500))
-        while not self.game_over:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    exit()
-            self.surface.blit(self.background_image, (0, 0))
-            self.handle_player_events()
-            self.handle_unit_actions()
-            self.draw()
-            pygame.display.update()
-            self.clock.tick(c.fps)
+    def update_surface(self):
+        self.surface.blit(self.game_map.surface, (0, 0))
+        pass

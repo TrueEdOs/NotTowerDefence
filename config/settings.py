@@ -1,6 +1,6 @@
 
-screen_width = 1000
-screen_height = 800
+screen_width = 1366
+screen_height = 900
 fps = 60
 font = "Airstream.ttf"
 control_button_text_size = 70
@@ -15,4 +15,4 @@ core_height = 100
 zombie_hp = 10
 zombie_width = 50
 zombie_height = 50
-zombie_speed = [1, 1]
+zombie_speed = 1
