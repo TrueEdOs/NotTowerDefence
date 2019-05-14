@@ -11,6 +11,7 @@ FPS = 60
 W = 800
 H = 600
 
+Authorization()
 pygame.init()
 sc = pygame.display.set_mode((W, H))
 clock = pygame.time.Clock()

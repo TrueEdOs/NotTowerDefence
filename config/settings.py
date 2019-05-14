@@ -2,7 +2,7 @@
 screen_width = 1366
 screen_height = 900
 fps = 60
-font = "Airstream.ttf"
+font = "config/Airstream.ttf"
 control_button_text_size = 70
 control_button_width = 100
 control_button_height = 50
