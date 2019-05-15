@@ -1,14 +1,17 @@
 import pygame
+import config.colors as color
 
 from RunnableStack import RunnableStack
 from runnable.ControlButton import ControlButton
 from runnable.MainMenu import MainMenu
 from runnable.TestMenu import TestMenu
+from runnable.Authorization import Authorization
 
 FPS = 60
-W = 1366
-H = 768
+W = 800
+H = 600
 
+Authorization()
 pygame.init()
 sc = pygame.display.set_mode((W, H))
 clock = pygame.time.Clock()
@@ -17,8 +20,9 @@ win = pygame.display.get_surface()
 
 
 # Game cycle
+
 runnable_stack = RunnableStack()
-runnable_stack.push(MainMenu(W, H, runnable_stack))
+runnable_stack.push(MainMenu(W, H, runnable_stack, color.brick))
 
 while not runnable_stack.is_empty():
     pygame.display.update()

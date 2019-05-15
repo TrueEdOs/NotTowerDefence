@@ -1,11 +1,15 @@
 import pygame
+import config.colors as color
+import config.settings as c
+
 from pygame.surface import Surface
+from models.TextObject import TextObject
 
 
 class ControlButton:
     button_id = 0
 
-    def __init__(self, title, name, x, y, width, height, func):
+    def __init__(self, title, name, x, y, width, height, button_color, func):
         self.title = title
         self.name = name
         self.id = ControlButton.button_id
@@ -16,13 +20,17 @@ class ControlButton:
         self.height = height
         self.func = func
         self.surface = Surface((self.width, self.height))
+        self.button_color = button_color
+        self.__selected_color = color.white
         self.draw()
 
+    def selected(self):
+        self.__selected_color, self.button_color = self.button_color, self.__selected_color
+
     def draw(self):
-        font = pygame.font.SysFont("arial", 15)
-        text = font.render(self.title, 0, (255, 255, 255))
-        self.surface.fill((255, 0, 0))
-        self.surface.blit(text, (10, 10))
+        text = TextObject(self.title, c.font, c.control_button_text_size, self.button_color)
+        self.surface.fill(color.brick)
+        self.surface.blit(text.Text, (10, 10))
 
     def pushed(self):
         self.func()

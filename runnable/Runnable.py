@@ -26,7 +26,9 @@ class Runnable:
         pass
 
     def update_surface(self):
-        pass
+        for button in self.controls:
+            button.draw()
+            self.surface.blit(button.surface, (button.x, button.y))
 
     def add_control_button(self, control_button):
         self.controls.append(control_button)
