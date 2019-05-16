@@ -1,7 +1,7 @@
 import pygame
 import config.colors as color
-import config.settings as c
 
+from config.settings import Settings
 from pygame.surface import Surface
 from models.TextObject import TextObject
 
@@ -28,7 +28,7 @@ class ControlButton:
         self.__selected_color, self.button_color = self.button_color, self.__selected_color
 
     def draw(self):
-        text = TextObject(self.title, c.font, c.control_button_text_size, self.button_color)
+        text = TextObject(self.title, Settings.font, Settings.control_button_text_size, self.button_color)
         self.surface.fill(color.brick)
         self.surface.blit(text.Text, (10, 10))
 

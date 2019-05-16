@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
-import config.colors as color
 from config.database import Database
+
+import config.colors as color
+import hashlib
 
 
 class Authorization:
@@ -27,10 +29,17 @@ class Authorization:
         entry_login = Entry(textvariable=self.login)
         entry_login.place(relx=.5, rely=.4, anchor="c", height=25, width=300)
 
-        entry_password = Entry(textvariable=self.password)
+        entry_password = Entry(textvariable=self.password, show='*')
         entry_password.place(relx=.5, rely=.5, anchor="c", height=25, width=300)
-        self.db = Database("user_data")
+
+        self.root.protocol("WM_DELETE_WINDOW", lambda: exit())
+        self.db = Database("database", "user_data")
         self.root.mainloop()
+
+    @staticmethod
+    def hash_password(password):
+        h = hashlib.sha512(password.encode('utf-8'))
+        return h.hexdigest()
 
     def sign_in(self):
         if not self.password.get() and not self.login.get():
@@ -44,7 +53,7 @@ class Authorization:
         elif self.db.find_login(self.login.get()):
             messagebox.showinfo("Warning", "This user is already exists")
         else:
-            self.db.add_user(self.login.get(), self.password.get())
+            self.db.add_user(self.login.get(), self.hash_password(self.password.get()))
             messagebox.showinfo("OK", "Done")
 
     def log_in(self):
@@ -54,7 +63,10 @@ class Authorization:
             messagebox.showinfo("Warning", "Empty login")
         elif not self.password.get():
             messagebox.showinfo("Warning", "Empty password")
-        elif self.db.find_user(self.login.get(), self.password.get()):
+        elif self.db.find_user(self.login.get(), self.hash_password(self.password.get())):
+            self.db.load_settings(self.login.get())
             self.root.destroy()
         else:
             messagebox.showinfo("Warning", "Wrong data")
+
+#Authorization()
