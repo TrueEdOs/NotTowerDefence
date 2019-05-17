@@ -42,4 +42,4 @@ class ControlButton:
             self.surface.blit(text.Text, (10, 10))
 
     def pushed(self):
-        self.func()
+        return self.func()

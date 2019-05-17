@@ -1,4 +1,6 @@
 import pygame
+
+import Resources
 import config.colors as color
 
 from RunnableStack import RunnableStack
@@ -7,6 +9,7 @@ from runnable.MainMenu import MainMenu
 from config.settings import Settings
 from runnable.TestMenu import TestMenu
 from runnable.Authorization import Authorization
+from units.Zombie import Zombie
 
 
 #Authorization()
@@ -14,8 +17,6 @@ pygame.init()
 sc = pygame.display.set_mode((Settings.screen_width, Settings.screen_height))
 clock = pygame.time.Clock()
 win = pygame.display.get_surface()
-
-
 
 # Game cycle
 

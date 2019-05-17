@@ -1,4 +1,6 @@
 import pygame
+
+import Resources
 import config.colors as color
 
 from config.settings import Settings
@@ -33,6 +35,7 @@ class MainMenu(Runnable):
         self.title = TextObject("Not Tower Defense", Settings.font, 90, color.yellow)
         self.surface.blit(self.title.Text, (100, 100))
         self.selected_button = 0
+
         new_game_button = ControlButton("New game", "newgame", 250, 250, 250, 100,  color.brick, color.black,
                                         lambda: runnable_stack.push(Game(Settings.screen_width, Settings.screen_height, self.runnable_stack)))
         quit_button = ControlButton("Quit", "quit", 300, 350, 250, 100, color.brick, color.black, lambda: runnable_stack.pop())
