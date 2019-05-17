@@ -1,5 +1,7 @@
 import pygame
 
+import Utils
+
 
 class Map:
     def __init__(self, width, height):
@@ -14,8 +16,12 @@ class Map:
                 return unit
         return None
 
-    def add_unit(self, unit):
-        self.units[unit.id] = unit
+    def add_unit(self, new_unit):
+        for unit in self.units.values():
+            if (unit.is_collide(new_unit) or new_unit.is_collide(unit)) and Utils.is_intersected(unit, new_unit):
+                return False
+        self.units[new_unit.id] = new_unit
+        return True
 
     def update_surface(self):
         self.surface.fill((255, 255, 255))

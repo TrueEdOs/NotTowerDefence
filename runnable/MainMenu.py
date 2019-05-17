@@ -1,4 +1,6 @@
 import pygame
+
+import Resources
 import config.colors as color
 import config.settings as c
 
@@ -33,7 +35,7 @@ class MainMenu(Runnable):
         self.surface.blit(self.title.Text, (100, 100))
         self.selected_button = 0
         new_game_button = ControlButton("New game", "newgame", 250, 250, 250, 100, color.black,
-                                        lambda: runnable_stack.push(Game(c.screen_width, c.screen_height, self.runnable_stack)))
+                                        lambda: runnable_stack.push(Game(width, height, self.runnable_stack)))
         quit_button = ControlButton("Quit", "quit", 300, 350, 250, 100, color.black, lambda: runnable_stack.pop())
 
         self.add_control_button(new_game_button)

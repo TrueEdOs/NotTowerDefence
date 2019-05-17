@@ -25,14 +25,12 @@ class MovableUnit(Unit):
             dy = pos[1] - self.pos[1]
         if self.pos[1] > pos[1]:
             dy *= -1
-        print(self.pos, pos, dx, dy)
         self.pos = (self.pos[0] + dx, self.pos[1] + dy)
 
     def move(self, pos):
         old_pos = (self.pos[0], self.pos[1])
         self.step_to(pos)
         if self.is_blocked():
-            print("AAAA")
             self.step_to(old_pos)
             return False
         return True
