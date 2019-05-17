@@ -5,8 +5,10 @@ import Utils
 
 
 class Runnable:
-    def __init__(self, width, height, runnable_stack):
+    def __init__(self, width, height, runnable_stack, x=0, y=0):
         self.controls = []
+        self.x = x
+        self.y = y
         self.surface = Surface((width, height))
         self.runnable_stack = runnable_stack
         self.events = []
@@ -18,8 +20,8 @@ class Runnable:
         for button in self.controls:
             for event in self.events:
                 if event.type is pygame.MOUSEBUTTONDOWN and event.button == 1 \
-                        and Utils.is_inside(event.pos, (button.x, button.y),
-                                            (button.x + button.width, button.y + button.height)):
+                        and Utils.is_inside(event.pos, (button.abs_x, button.abs_y),
+                                            (button.abs_x + button.width, button.abs_y + button.height)):
                     button.pushed()
 
     def update_state(self):
@@ -33,6 +35,8 @@ class Runnable:
     def add_control_button(self, control_button):
         self.controls.append(control_button)
         self.surface.blit(control_button.surface, (control_button.x, control_button.y))
+        control_button.abs_x += self.x
+        control_button.abs_y += self.y
         pass
 
     def step(self):

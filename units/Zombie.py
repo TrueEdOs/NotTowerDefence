@@ -1,7 +1,8 @@
 import pygame
-
 import Resources
-import config.settings as c
+
+
+from config.settings import Settings
 from controllers.ZombieController import ZombieController
 
 from units.MovableUnit import MovableUnit
@@ -9,8 +10,8 @@ from units.MovableUnit import MovableUnit
 
 class Zombie(MovableUnit):
     def __init__(self, game_map, pos):
-        MovableUnit.__init__(self, game_map, ZombieController(), c.zombie_hp,
-                             pos, c.zombie_width, c.zombie_height, c.zombie_speed, "evil", "zombie", Resources.UnitTypes.enemy)
+        MovableUnit.__init__(self, game_map, ZombieController(), Settings.zombie_hp,
+                             pos, Settings.zombie_width, Settings.zombie_height, Settings.zombie_speed, "evil", "zombie", Resources.UnitTypes.enemy)
 
     def draw(self):
         pygame.draw.circle(self.game_map.surface, (0, 200, 0),

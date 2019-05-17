@@ -24,6 +24,7 @@ runnable_stack.push(MainMenu(Settings.screen_width, Settings.screen_height, runn
 
 while not runnable_stack.is_empty():
     pygame.display.update()
-    win.blit(runnable_stack.last_task().surface, (0, 0))
+    win.blit(runnable_stack.last_task().surface,
+             (runnable_stack.last_task().x, runnable_stack.last_task().y))
     runnable_stack.last_task().step()
     clock.tick(Settings.fps)
