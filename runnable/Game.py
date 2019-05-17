@@ -22,9 +22,9 @@ class Game(Runnable):
         self.game_map = Map(width, height)
         self.game_map.add_unit(Core(self.game_map, (300, 300)))
         self.game_map.add_unit(Zombie(self.game_map, (100, 100)))
-        self.game_map.add_unit(Zombie(self.game_map, (100, 400)))
-        self.game_map.add_unit(Zombie(self.game_map, (600, 600)))
-        self.game_map.add_unit(Zombie(self.game_map, (300, 700)))
+       # self.game_map.add_unit(Zombie(self.game_map, (100, 400)))
+       # self.game_map.add_unit(Zombie(self.game_map, (600, 600)))
+       # self.game_map.add_unit(Zombie(self.game_map, (300, 700)))
 
     def handle_player_events(self):
         for event in self.events:

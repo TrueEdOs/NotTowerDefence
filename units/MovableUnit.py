@@ -39,6 +39,6 @@ class MovableUnit(Unit):
 
     def is_blocked(self):
         for unit in self.game_map.units.values():
-            if self.is_collide(unit) and unit.is_collide(self) and Utils.is_intersected(self, unit):
+            if (self.is_collide(unit) or unit.is_collide(self)) and Utils.is_intersected(self, unit):
                 return True
         return False
