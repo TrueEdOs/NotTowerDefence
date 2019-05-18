@@ -1,6 +1,16 @@
+from enum import Enum
 
-class Settings:
-    screen_width = 800
+
+class UnitTypes(Enum):
+    core = 0
+    gun = 1
+    wall = 2
+    bullet = 3
+    enemy = 4
+
+
+class Constants:
+    screen_width = 1200
     screen_height = 600
     fps = 60
     font = "config/Airstream.ttf"
@@ -14,6 +24,9 @@ class Settings:
     pause_menu_height = screen_height // 3
     menu_alpha = 5
 
+    build_menu_width = 350
+    build_menu_height = 600
+
     core_hp = 1500
     core_width = 100
     core_height = 100
@@ -22,3 +35,4 @@ class Settings:
     zombie_width = 50
     zombie_height = 50
     zombie_speed = 1
+

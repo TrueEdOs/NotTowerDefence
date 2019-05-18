@@ -1,4 +1,3 @@
-import Resources
 import pygame
 
 from config.textures import Textures
