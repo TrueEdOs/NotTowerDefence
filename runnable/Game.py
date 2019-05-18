@@ -1,9 +1,8 @@
 import pygame
 import Utils
-import Resources
 import config.colors as color
 
-from config.settings import Settings
+from config.Resources import Constants
 from controllers.Controller import Controller
 from models.BuildMenu import BuildMenu
 from models.Map import Map
@@ -24,8 +23,8 @@ class Game(Runnable):
         self.wave_count = 0
         self.game_over = False
 
-        self.background_image = pygame.image.load(Settings.background_image)
-        self.game_map = Map(width - Resources.Constants.build_menu_width, height)
+        self.background_image = pygame.image.load(Constants.background_image)
+        self.game_map = Map(width - Constants.build_menu_width, height)
         self.hand = None
         self.money = 100
         self.money_label = None
@@ -50,7 +49,7 @@ class Game(Runnable):
         self.game_map.add_unit(Zombie(self.game_map, (300, 700)))
 
     def update_labels(self):
-        self.money_label = TextObject("Money: " + str(self.money), Settings.font, 50, color.red)
+        self.money_label = TextObject("Money: " + str(self.money), Constants.font, 50, color.red)
 
     def handle_player_events(self):
         for event in self.events:
@@ -59,10 +58,10 @@ class Game(Runnable):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.runnable_stack.push(PauseMenu(Settings.pause_menu_width, Settings.pause_menu_height,
+                    self.runnable_stack.push(PauseMenu(Constants.pause_menu_width, Constants.pause_menu_height,
                                                        self.runnable_stack, color.lightgrey,
-                                                       x=Settings.screen_width // 2 - Settings.pause_menu_width // 2,
-                                                       y=Settings.screen_height // 2 - Settings.pause_menu_height // 2))
+                                                       x=Constants.screen_width // 2 - Constants.pause_menu_width // 2,
+                                                       y=Constants.screen_height // 2 - Constants.pause_menu_height // 2))
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 res = self.build_menu.clicked((event.pos[0] - self.game_map.width, event.pos[1]))

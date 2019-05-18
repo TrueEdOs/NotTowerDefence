@@ -1,15 +1,15 @@
 import pygame
-import Resources
 import Utils
 import config.colors as color
 
 from runnable.ControlButton import ControlButton
+from config.Resources import Constants
 
 
 class BuildMenu:
     def __init__(self, spawn_funcs):
-        width = Resources.Constants.build_menu_width
-        height = Resources.Constants.build_menu_height
+        width = Constants.build_menu_width
+        height = Constants.build_menu_height
         self.surface = pygame.Surface((width, height))
         self.surface.fill((255, 0, 0))
         self.controls = []

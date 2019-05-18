@@ -1,6 +1,6 @@
 import pymongo
 
-from config.settings import Settings
+from config.Resources import Constants, UnitTypes
 
 
 class Database:
@@ -17,13 +17,13 @@ class Database:
 
     def load_settings(self):
         for x in self.col.find({}, {"_id": 0}):
-            setattr(Settings, list(x.keys())[0], list(x.values())[0])
+            setattr(Constants, list(x.keys())[0], list(x.values())[0])
 
     def add_settings(self):
         self.col.delete_many({})
-        for key in dict(Settings.__dict__):
+        for key in dict(Constants.__dict__):
             if not key.startswith("__"):
-                self.col.insert_one({key: Settings.__dict__[key]})
+                self.col.insert_one({key: Constants.__dict__[key]})
 
     def find_user(self, login, password):
         if self.col.find_one({"login": login, "password": password}):

@@ -1,9 +1,7 @@
 import pygame
-
-import Resources
 import config.colors as color
 
-from config.settings import Settings
+from config.Resources import Constants
 from runnable.ControlButton import ControlButton
 from runnable.Game import Game
 from runnable.Runnable import Runnable
@@ -32,13 +30,14 @@ class MainMenu(Runnable):
         #self.menu_surface = pygame.display.set_mode((width, height))
         self.is_menu_running = False
         self.surface.fill(bg_color)
-        self.title = TextObject("Not Tower Defense", Settings.font, 90, color.yellow)
-        self.surface.blit(self.title.Text, (100, 100))
+        self.title = TextObject("Not Tower Defense", Constants.font, 90, color.yellow)
+        self.surface.blit(self.title.Text, (width / 2 - 250, 100))
         self.selected_button = 0
 
-        new_game_button = ControlButton("New game", "newgame", 250, 250, 250, 100,  color.brick, color.black,
-                                        lambda: runnable_stack.push(Game(Settings.screen_width, Settings.screen_height, self.runnable_stack)))
-        quit_button = ControlButton("Quit", "quit", 300, 350, 250, 100, color.brick, color.black, lambda: runnable_stack.pop())
+        new_game_button = ControlButton("New game", "newgame", width / 2 - 125, height / 2 - 75, 250, 100,  color.brick, color.black,
+                                        lambda: runnable_stack.push(Game(Constants.screen_width, Constants.screen_height, self.runnable_stack)))
+        quit_button = ControlButton("Quit", "quit", width / 2 - 75, height / 2 + 25, 250, 100, color.brick,
+                                    color.black, lambda: runnable_stack.pop())
 
         self.add_control_button(new_game_button)
         self.add_control_button(quit_button)

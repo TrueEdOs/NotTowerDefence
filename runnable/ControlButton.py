@@ -1,7 +1,7 @@
 import pygame
 import config.colors as color
 
-from config.settings import Settings
+from config.Resources import Constants
 from pygame.surface import Surface
 from models.TextObject import TextObject
 
@@ -37,7 +37,7 @@ class ControlButton:
 
     def draw(self):
         if not self.background_image:
-            text = TextObject(self.title, Settings.font, Settings.control_button_text_size, self.font_color)
+            text = TextObject(self.title, Constants.font, Constants.control_button_text_size, self.font_color)
             self.surface.fill(self.button_color)
             self.surface.blit(text.Text, (10, 10))
 
