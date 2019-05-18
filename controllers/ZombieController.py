@@ -10,4 +10,6 @@ class ZombieController:
                 core = obj
                 break
         unit.move(core.pos)
+        #unit.attack(core)
+        #print(unit.pos)
 

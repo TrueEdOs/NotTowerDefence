@@ -1,8 +1,8 @@
 import pygame
-
 import Resources
 import Utils
-from config import colors
+import config.colors as color
+
 from runnable.ControlButton import ControlButton
 
 
@@ -16,7 +16,7 @@ class BuildMenu:
         y = 0
         for func in spawn_funcs:
             self.controls.append(ControlButton(func().name + "   " + str(func().cost) + "$$", func().name + "SB",
-                                               0, y, width, 100, colors.gray13, func))
+                                               0, y, width, 100, color.gray13, color.black, func))
             y += 100
         self.draw()
 
@@ -28,7 +28,7 @@ class BuildMenu:
 
     def clicked(self, pos):
         for button in self.controls:
-            if Utils.is_inside(pos, (button.x, button.y),
-                               (button.x + button.width, button.y + button.height)):
+            if Utils.is_inside(pos, (button.abs_x, button.abs_y),
+                               (button.abs_x + button.width, button.abs_y + button.height)):
                 return button.pushed()
         return None

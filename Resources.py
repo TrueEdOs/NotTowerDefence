@@ -13,5 +13,5 @@ class Constants:
     display_height = 600
     display_width = 800
     build_menu_height = 600
-    build_menu_width = 200
+    build_menu_width = 300
 

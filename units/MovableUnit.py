@@ -25,6 +25,7 @@ class MovableUnit(Unit):
             dy = pos[1] - self.pos[1]
         if self.pos[1] > pos[1]:
             dy *= -1
+
         self.pos = (self.pos[0] + dx, self.pos[1] + dy)
 
     def move(self, pos):
@@ -37,6 +38,6 @@ class MovableUnit(Unit):
 
     def is_blocked(self):
         for unit in self.game_map.units.values():
-            if self.is_collide(unit) and unit.is_collide(self) and Utils.is_intersected(self, unit):
+            if (self.is_collide(unit) or unit.is_collide(self)) and Utils.is_intersected(self, unit):
                 return True
         return False

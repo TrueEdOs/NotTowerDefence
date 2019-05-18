@@ -1,7 +1,7 @@
 import pygame
-
 import Resources
-import config.settings as c
+
+from config.settings import Settings
 from controllers.Controller import Controller
 
 from units.Unit import Unit
@@ -9,8 +9,8 @@ from units.Unit import Unit
 
 class Core(Unit):
     def __init__(self, game_map, pos):
-        Unit.__init__(self, game_map, Controller(), c.core_hp, pos, c.core_width,
-                      c.core_height, "player", "core", Resources.UnitTypes.core)
+        Unit.__init__(self, game_map, Controller(), Settings.core_hp, pos, Settings.core_width,
+                      Settings.core_height, "player", "core", Resources.UnitTypes.core)
 
     def draw(self):
         pygame.draw.circle(self.game_map.surface, (255, 50, 0),
