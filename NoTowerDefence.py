@@ -15,11 +15,12 @@ from units.Zombie import Zombie
 #Authorization()
 pygame.init()
 sc = pygame.display.set_mode((Settings.screen_width, Settings.screen_height))
+pygame.display.set_caption("NTD")
+#pygame.display.set_icon(pygame.image.load("images/box.jpg"))
 clock = pygame.time.Clock()
 win = pygame.display.get_surface()
 
 # Game cycle
-
 runnable_stack = RunnableStack()
 runnable_stack.push(MainMenu(Settings.screen_width, Settings.screen_height, runnable_stack, color.brick))
 

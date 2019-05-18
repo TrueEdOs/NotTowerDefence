@@ -19,19 +19,19 @@ class Unit:
 
     @property
     def left(self):
-        return self.x
+        return self.pos[0]
 
     @property
     def right(self):
-        return self.x + self.width
+        return self.left() + self.width
 
     @property
     def bottom(self):
-        return self.y
+        return self.pos[1]
 
     @property
     def top(self):
-        return self.y + self.height
+        return self.bottom() + self.height
 
     def draw(self):
         pass

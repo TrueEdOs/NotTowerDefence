@@ -7,7 +7,7 @@ from units.Building import Building
 
 class Wall(Building):
     def __init__(self, game_map, pos, texture):
-        Building.__init__(self, game_map, Controller(), 10, pos, 66, 66, "wall", Resources.UnitTypes.wall, 1, texture)
+        Building.__init__(self, game_map, Controller(), 10, pos, 30, 30, "wall", Resources.UnitTypes.wall, 1, texture)
 
 
     def is_collide(self, to):

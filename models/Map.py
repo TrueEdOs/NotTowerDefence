@@ -31,6 +31,10 @@ class Map:
     def action_all(self):
         for unit in self.units.values():
             unit.action()
+        to_delete = []
+        for unit in self.units.values():
+            if unit.hp <= 0:
+                to_delete
 
     def step(self):
         self.action_all()

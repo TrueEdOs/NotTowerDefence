@@ -32,7 +32,18 @@ class Game(Runnable):
         self.build_menu = BuildMenu([lambda: Wall(self.game_map, (0, 0), 'images/box.jpg'),
                                      lambda: Cannon(self.game_map, (0, 0), 'images/cannon.png')])
 
-        self.game_map.add_unit(Core(self.game_map, (300, 300)))
+        self.game_map.add_unit(Core(self.game_map, (250, 250)))
+        for i in range(7):
+            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * i, 200), 'images/box.jpg'))
+        for i in range(1, 7):
+            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * 6, 200 + 31 * i), 'images/box.jpg'))
+
+        for i in range(5, -1, -1):
+            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * i, 200 + 31 * 6), 'images/box.jpg'))
+
+        for i in range(1, 6):
+            self.game_map.add_unit(Wall(self.game_map, (200, 200 + 31 * i), 'images/box.jpg'))
+
         self.game_map.add_unit(Zombie(self.game_map, (100, 100)))
         self.game_map.add_unit(Zombie(self.game_map, (100, 400)))
         self.game_map.add_unit(Zombie(self.game_map, (600, 600)))
