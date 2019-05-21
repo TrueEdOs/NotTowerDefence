@@ -1,15 +1,16 @@
-from units.Core import Core
 from config.Resources import UnitTypes
+from controllers.Controller import Controller
 
-
-class ZombieController:
+class ZombieController(Controller):
     def do(self, unit, all_units):
-        core = None
-        for obj in all_units:
-            if UnitTypes.core == obj.unit_type:
-                core = obj
-                break
-        unit.move(core.pos)
-        #unit.attack(core)
-        #print(unit.pos)
+        target = self.find_nearest_obj(unit, all_units, {UnitTypes.core, UnitTypes.gun})
+        if target is None:
+            exit(0)
+        unit.reload()
+        if unit.move(target.pos) is False:
+            obj = self.find_nearest_obj(unit, all_units)
+            if obj.unit_type is UnitTypes.wall:
+                target = obj
+        unit.attack(target)
+        #print(target.hp)
 

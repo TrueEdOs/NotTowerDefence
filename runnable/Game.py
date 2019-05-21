@@ -14,6 +14,7 @@ from units.Zombie import Zombie
 from controllers.ZombieController import ZombieController
 from runnable.PauseMenu import PauseMenu
 from models.TextObject import TextObject
+from units.Shell import Shell
 
 
 class Game(Runnable):
@@ -46,7 +47,6 @@ class Game(Runnable):
         self.game_map.add_unit(Zombie(self.game_map, (100, 100)))
         self.game_map.add_unit(Zombie(self.game_map, (100, 400)))
         self.game_map.add_unit(Zombie(self.game_map, (600, 600)))
-        self.game_map.add_unit(Zombie(self.game_map, (300, 700)))
 
     def update_labels(self):
         self.money_label = TextObject("Money: " + str(self.money), Constants.font, 50, color.red)

@@ -10,7 +10,7 @@ class UnitTypes(Enum):
 
 
 class Constants:
-    screen_width = 1200
+    screen_width = 800
     screen_height = 600
     fps = 60
     font = "config/Airstream.ttf"
@@ -34,5 +34,21 @@ class Constants:
     zombie_hp = 10
     zombie_width = 50
     zombie_height = 50
-    zombie_speed = 1
+    zombie_speed = 1/5
+    zombie_damage = 10
+    zombie_range = 20
+    zombie_reload_time = 5
 
+    shell_hp = 30
+    shell_width = 10
+    shell_height = 10
+    shell_speed = 5
+    shell_damage = 20
+    shell_range = 1
+
+    cannon_hp = 10
+    cannon_width = 66
+    cannon_height = 66
+    cannon_damage = 0
+    cannon_range = 200
+    cannon_reload_time = 200
