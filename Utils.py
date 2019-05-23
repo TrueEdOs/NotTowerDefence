@@ -1,4 +1,5 @@
 from pygame.surface import Surface
+from units.MovableUnit import MovableUnit
 import math
 
 def is_inside(pos, top_left, bottom_right):
@@ -51,3 +52,21 @@ def dist(unit1, unit2):
             min_dist = min(ro(v1[i], v2[j]), min_dist)
 
     return min_dist
+
+
+def is_visible_from(unit1, unit2, unit_type=None):
+    if not unit_type:
+        unit_type = unit1.unit_type
+    movable_shell = MovableUnit(unit1.game_map, None, None, unit1.pos,
+                                unit1.width, unit1.height, 1, None, None, unit_type)
+    dx, dy = movable_shell.step_to(unit2.pos)
+    dx /= abs(dx)
+    dy /= abs(dy)
+    test_unit = MovableUnit(unit1.game_map, None, None, (unit1.center[0] + dx * unit1.width, unit1.center[1] +
+                                                         dy * unit1.height), 10, 10, 10, None, None, unit_type)
+    while dist(test_unit, unit2) > test_unit.speed:
+        if not test_unit.move(unit2.pos):
+            break
+    if dist(test_unit, unit2) > test_unit.speed:
+        return False
+    return True

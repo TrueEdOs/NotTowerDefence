@@ -1,6 +1,7 @@
 from config.Resources import UnitTypes
 from controllers.Controller import Controller
 
+
 class ZombieController(Controller):
     def do(self, unit, all_units):
         target = self.find_nearest_obj(unit, all_units, {UnitTypes.core, UnitTypes.gun})
@@ -11,6 +12,6 @@ class ZombieController(Controller):
             obj = self.find_nearest_obj(unit, all_units)
             if obj.unit_type is UnitTypes.wall:
                 target = obj
-        unit.attack(target)
-        #print(target.hp)
+        if target:
+            unit.attack(target)
 

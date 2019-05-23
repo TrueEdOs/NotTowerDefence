@@ -8,9 +8,9 @@ from units.Shell import Shell
 
 
 class Cannon(Building, AttackableUnit):
-    def __init__(self, game_map, pos, texture):
+    def __init__(self, game_map, pos):
         Building.__init__(self, game_map, CannonController(), 10, pos, Constants.cannon_width, Constants.cannon_height,
-                          "cannon", UnitTypes.gun, 5, texture)
+                          "cannon", UnitTypes.gun, 5)
         AttackableUnit.__init__(self, game_map, CannonController(), Constants.cannon_hp,
                                 pos, Constants.cannon_width, Constants.cannon_height, Constants.cannon_damage,
                                 Constants.cannon_range, Constants.cannon_reload_time, "good", "cannon", UnitTypes.gun)
@@ -24,7 +24,7 @@ class Cannon(Building, AttackableUnit):
         return True
 
     def attack(self, unit):
-        if self.is_reloaded == 0:
-            self.game_map.add_unit(Shell(self.game_map, (self.pos[0], self.pos[1]), unit.pos))
+        if self.is_reloaded == 0 and self.can_attack(unit):
+            self.game_map.add_unit(Shell(self.game_map, (self.pos[0], self.pos[1]), unit.center))
             return True
         return False

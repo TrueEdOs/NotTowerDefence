@@ -28,6 +28,7 @@ class MovableUnit(Unit):
             dy *= -1
 
         self.pos = (self.pos[0] + dx, self.pos[1] + dy)
+        return dx, dy
 
     def move(self, pos):
         old_pos = (self.pos[0], self.pos[1])

@@ -1,5 +1,6 @@
-from Utils import dist
+from Utils import dist, is_visible_from
 from units.Unit import Unit
+from config.Resources import UnitTypes
 import math
 
 
@@ -19,6 +20,8 @@ class AttackableUnit(Unit):
 
     def can_attack(self, unit):
         if self.attack_range < dist(self, unit):
+            return False
+        if self.attack_range > 50 and not is_visible_from(self, unit, UnitTypes.bullet):
             return False
         return True
 

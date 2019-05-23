@@ -1,5 +1,5 @@
 import pygame
-
+from config.textures import Textures
 
 class Unit:
     unit_id = 0
@@ -15,6 +15,9 @@ class Unit:
         self.name = name
         self.unit_type = unit_type
         self.id = Unit.unit_id
+        self.surface = None
+        if name in Textures:
+            self.surface = pygame.transform.scale(Textures[name], (self.width, self.height))
         Unit.unit_id += 1
 
     @property
@@ -23,7 +26,7 @@ class Unit:
 
     @property
     def right(self):
-        return self.left() + self.width
+        return self.left+ self.width
 
     @property
     def bottom(self):
@@ -31,7 +34,11 @@ class Unit:
 
     @property
     def top(self):
-        return self.bottom() + self.height
+        return self.bottom + self.height
+
+    @property
+    def center(self):
+        return (self.left + self.right) / 2, (self.bottom + self.top) / 2
 
     def draw(self):
         pass

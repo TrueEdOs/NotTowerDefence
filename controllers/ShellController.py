@@ -3,7 +3,8 @@ from controllers.Controller import Controller
 
 class ShellController(Controller):
     def do(self, unit, all_units):
-        unit.move(unit.target_pos)
+        unit.move(unit.target_direction)
         target = self.find_nearest_obj(unit, all_units)
         unit.reload()
-        unit.attack(target)
+        if target:
+            unit.attack(target)

@@ -17,8 +17,11 @@ class Zombie(MovableUnit, AttackableUnit):
                                 Constants.zombie_range, Constants.zombie_reload_time, "evil", "zombie", UnitTypes.enemy)
 
     def draw(self):
-        pygame.draw.circle(self.game_map.surface, (0, 200, 0),
-                           (int(self.pos[0] + self.width / 2), int(self.pos[1] + self.height / 2)), self.width // 2)
+        if self.surface:
+            self.game_map.surface.blit(self.surface, self.pos)
+        else:
+            pygame.draw.circle(self.game_map.surface, (0, 200, 0),
+                              (int(self.pos[0] + self.width / 2), int(self.pos[1] + self.height / 2)), self.width // 2)
 
     def is_collide(self, to):
         if to.unit_type == UnitTypes.core:
