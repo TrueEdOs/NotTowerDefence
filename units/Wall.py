@@ -7,9 +7,8 @@ from config.Resources import UnitTypes
 
 
 class Wall(Building):
-    def __init__(self, game_map, pos, texture):
-        Building.__init__(self, game_map, Controller(), 10, pos, 30, 30, "wall", UnitTypes.wall, 1, texture)
-
+    def __init__(self, game_map, pos):
+        Building.__init__(self, game_map, Controller(), 10, pos, 30, 30, "wall", UnitTypes.wall, 1)
 
     def is_collide(self, to):
         if to.unit_type == UnitTypes.bullet:
@@ -20,5 +19,7 @@ class Wall(Building):
         self.game_map.surface.blit(self.surface, self.pos)
 
     def is_collide(self, to):
+        if to.unit_type == UnitTypes.bullet:
+            return False
         return True
 

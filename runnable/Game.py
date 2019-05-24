@@ -14,6 +14,7 @@ from units.Zombie import Zombie
 from controllers.ZombieController import ZombieController
 from runnable.PauseMenu import PauseMenu
 from models.TextObject import TextObject
+from units.Shell import Shell
 
 
 class Game(Runnable):
@@ -28,25 +29,24 @@ class Game(Runnable):
         self.hand = None
         self.money = 100
         self.money_label = None
-        self.build_menu = BuildMenu([lambda: Wall(self.game_map, (0, 0), 'images/box.jpg'),
-                                     lambda: Cannon(self.game_map, (0, 0), 'images/cannon.png')])
+        self.build_menu = BuildMenu([lambda: Wall(self.game_map, (0, 0)),
+                                     lambda: Cannon(self.game_map, (0, 0))])
 
         self.game_map.add_unit(Core(self.game_map, (250, 250)))
         for i in range(7):
-            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * i, 200), 'images/box.jpg'))
+            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * i, 200)))
         for i in range(1, 7):
-            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * 6, 200 + 31 * i), 'images/box.jpg'))
+            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * 6, 200 + 31 * i)))
 
         for i in range(5, -1, -1):
-            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * i, 200 + 31 * 6), 'images/box.jpg'))
+            self.game_map.add_unit(Wall(self.game_map, (200 + 31 * i, 200 + 31 * 6)))
 
         for i in range(1, 6):
-            self.game_map.add_unit(Wall(self.game_map, (200, 200 + 31 * i), 'images/box.jpg'))
+            self.game_map.add_unit(Wall(self.game_map, (200, 200 + 31 * i)))
 
         self.game_map.add_unit(Zombie(self.game_map, (100, 100)))
         self.game_map.add_unit(Zombie(self.game_map, (100, 400)))
         self.game_map.add_unit(Zombie(self.game_map, (600, 600)))
-        self.game_map.add_unit(Zombie(self.game_map, (300, 700)))
 
     def update_labels(self):
         self.money_label = TextObject("Money: " + str(self.money), Constants.font, 50, color.red)

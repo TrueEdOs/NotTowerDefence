@@ -12,10 +12,13 @@ class Core(Unit):
                       Constants.core_height, "player", "core", UnitTypes.core)
 
     def draw(self):
-        pygame.draw.circle(self.game_map.surface, (255, 50, 0),
-                           (int(self.pos[0] + self.width / 2), int(self.pos[1] + self.height / 2)), self.width // 2)
+        if self.surface:
+            self.game_map.surface.blit(self.surface, self.pos)
+        else:
+            pygame.draw.circle(self.game_map.surface, (255, 50, 0),
+                              (int(self.pos[0] + self.width / 2), int(self.pos[1] + self.height / 2)), self.width // 2)
 
     def is_collide(self, to):
-        if to.unit_type == UnitTypes.enemy:
+        if to.unit_type == UnitTypes.enemy or to.unit_type == UnitTypes.bullet:
             return True
         return False

@@ -1,5 +1,4 @@
 import pygame
-
 import Utils
 
 
@@ -29,12 +28,12 @@ class Map:
             unit.draw()
 
     def action_all(self):
-        for unit in self.units.values():
+        for unit in list(self.units.values()):
             unit.action()
-        to_delete = []
-        for unit in self.units.values():
+
+        for unit in list(self.units.values()):
             if unit.hp <= 0:
-                to_delete
+                self.units.pop(unit.id)
 
     def step(self):
         self.action_all()

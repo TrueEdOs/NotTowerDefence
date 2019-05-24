@@ -1,7 +1,8 @@
 import Utils
-from units.Unit import Unit
 import math
 
+from units.Unit import Unit
+from config.Resources import UnitTypes
 
 class MovableUnit(Unit):
     def __init__(self, game_map, controller, hp, pos, width, height, speed, owner, name, unit_type):
@@ -27,6 +28,7 @@ class MovableUnit(Unit):
             dy *= -1
 
         self.pos = (self.pos[0] + dx, self.pos[1] + dy)
+        return dx, dy
 
     def move(self, pos):
         old_pos = (self.pos[0], self.pos[1])
@@ -38,6 +40,8 @@ class MovableUnit(Unit):
 
     def is_blocked(self):
         for unit in self.game_map.units.values():
+            if self == unit:
+                continue
             if (self.is_collide(unit) or unit.is_collide(self)) and Utils.is_intersected(self, unit):
                 return True
         return False
