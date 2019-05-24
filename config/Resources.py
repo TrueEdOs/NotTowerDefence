@@ -34,7 +34,7 @@ class Constants:
     zombie_hp = 10
     zombie_width = 50
     zombie_height = 50
-    zombie_speed = 1/5
+    zombie_speed = 1/7
     zombie_damage = 10
     zombie_range = 20
     zombie_reload_time = 5
@@ -42,7 +42,7 @@ class Constants:
     shell_hp = 5
     shell_width = 10
     shell_height = 10
-    shell_speed = 8
+    shell_speed = 20
     shell_damage = shell_hp
     shell_range = 1
 

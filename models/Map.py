@@ -8,6 +8,7 @@ class Map:
         self.height = height
         self.surface = pygame.Surface((width, height))
         self.units = {}
+        self.killed = []
 
     def is_collide_with_something(self, x):
         for unit in self.units.values():
@@ -30,9 +31,10 @@ class Map:
     def action_all(self):
         for unit in list(self.units.values()):
             unit.action()
-
+        self.killed.clear()
         for unit in list(self.units.values()):
             if unit.hp <= 0:
+                self.killed.append(unit)
                 self.units.pop(unit.id)
 
     def step(self):

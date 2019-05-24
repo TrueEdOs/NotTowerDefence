@@ -15,7 +15,7 @@ from units.Zombie import Zombie
 pygame.init()
 sc = pygame.display.set_mode((Constants.screen_width, Constants.screen_height))
 pygame.display.set_caption("NTD")
-#pygame.display.set_icon(pygame.image.load("images/box.jpg"))
+pygame.display.set_icon(pygame.image.load("images/canon.jpg"))
 clock = pygame.time.Clock()
 win = pygame.display.get_surface()
 

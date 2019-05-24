@@ -64,7 +64,8 @@ class Authorization:
         elif not self.password.get():
             messagebox.showinfo("Warning", "Empty password")
         elif self.db.find_user(self.login.get(), self.hash_password(self.password.get())):
-            self.db.load_settings(self.login.get())
+            self.cur_db = Database(self.login.get(), "settings")
+            self.cur_db.load_settings()
             self.root.destroy()
         else:
             messagebox.showinfo("Warning", "Wrong data")

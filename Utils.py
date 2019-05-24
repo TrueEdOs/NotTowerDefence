@@ -2,6 +2,7 @@ from pygame.surface import Surface
 from units.MovableUnit import MovableUnit
 import math
 
+
 def is_inside(pos, top_left, bottom_right):
     if top_left[0] <= pos[0] <= bottom_right[0] and top_left[1] <= pos[1] <= bottom_right[1]:
         return True
@@ -13,6 +14,10 @@ def is_intersected(x, y):
             x.pos[1] > y.pos[1] + y.height or x.pos[1] + x.height < y.pos[1]:
         return False
     return True
+
+
+def classical_dist(v1, v2):
+    return math.sqrt((v1[0] - v2[0]) ** 2 + (v1[1] - v2[1]) ** 2)
 
 
 def dist(unit1, unit2):

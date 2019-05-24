@@ -1,6 +1,7 @@
 import pygame
 import Utils
 import config.colors as color
+from config import Resources
 
 from config.Resources import Constants
 from controllers.Controller import Controller
@@ -23,12 +24,15 @@ class Game(Runnable):
         self.timer = 0
         self.wave_count = 0
         self.game_over = False
+        self.score = 0
 
         self.background_image = pygame.image.load(Constants.background_image)
         self.game_map = Map(width - Constants.build_menu_width, height)
         self.hand = None
         self.money = 100
+        self.next_wave = 100
         self.money_label = None
+        self.score_label = None
         self.build_menu = BuildMenu([lambda: Wall(self.game_map, (0, 0)),
                                      lambda: Cannon(self.game_map, (0, 0))])
 
@@ -40,16 +44,18 @@ class Game(Runnable):
 
         for i in range(5, -1, -1):
             self.game_map.add_unit(Wall(self.game_map, (200 + 31 * i, 200 + 31 * 6)))
-
         for i in range(1, 6):
             self.game_map.add_unit(Wall(self.game_map, (200, 200 + 31 * i)))
 
-        self.game_map.add_unit(Zombie(self.game_map, (100, 100)))
-        self.game_map.add_unit(Zombie(self.game_map, (100, 400)))
-        self.game_map.add_unit(Zombie(self.game_map, (600, 600)))
+        self.zombie_controller = ZombieController()
+
+    def spawn_wave(self):
+        self.game_map.add_unit(Zombie(self.game_map, (0, 0), self.zombie_controller))
+        self.game_map.add_unit(Zombie(self.game_map, (600, 600), self.zombie_controller))
 
     def update_labels(self):
         self.money_label = TextObject("Money: " + str(self.money), Constants.font, 50, color.red)
+        self.score_label = TextObject("Score: " + str(self.score), Constants.font, 50, color.red)
 
     def handle_player_events(self):
         for event in self.events:
@@ -77,15 +83,28 @@ class Game(Runnable):
 
     def update_state(self):
         self.game_map.step()
+        for unit in self.game_map.killed:
+            if unit.unit_type == Resources.UnitTypes.core:
+                self.runnable_stack.pop()
+            if unit.unit_type == Resources.UnitTypes.enemy:
+                self.score += 2
+        self.next_wave -= 1
+        self.timer += 1
+        if self.next_wave == 0:
+            self.spawn_wave()
+            self.next_wave = 1200
         self.update_labels()
         if self.hand:
             self.hand.pos = pygame.mouse.get_pos()
-        pass
 
     def update_surface(self):
+        if self.timer % 20:
+            return
         if self.hand:
             self.hand.draw()
         self.surface.blit(self.game_map.surface, (self.x, self.y))
         self.surface.blit(self.build_menu.surface, (self.game_map.width, 0))
 
         self.surface.blit(self.money_label.Text, (0, 0))
+
+        self.surface.blit(self.score_label.Text, (200, 0))

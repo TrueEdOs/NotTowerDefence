@@ -43,7 +43,7 @@ class Database:
         self.col.drop()
 
 #d = Database("user_data")
-#d = Database("Ctalk3r", "settings")
+#d = Database("User", "settings")
 #d.add_settings()
 #d.load_settings()
 #d.print_db()
