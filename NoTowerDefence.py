@@ -9,13 +9,14 @@ from config.Resources import Constants
 from runnable.TestMenu import TestMenu
 from runnable.Authorization import Authorization
 from units.Zombie import Zombie
+from config.textures import Textures
 
 
-#Authorization()
+Authorization()
 pygame.init()
 sc = pygame.display.set_mode((Constants.screen_width, Constants.screen_height))
 pygame.display.set_caption("NTD")
-pygame.display.set_icon(pygame.image.load("images/canon.jpg"))
+pygame.display.set_icon(Textures["cannon"])
 clock = pygame.time.Clock()
 win = pygame.display.get_surface()
 

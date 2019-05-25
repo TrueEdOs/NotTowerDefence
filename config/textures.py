@@ -11,7 +11,5 @@ for image in images:
     name = image[0:-4]
     Textures[name] = pygame.image.load(os.path.join(directory, image))
 
-print(Textures)
-
 
 
