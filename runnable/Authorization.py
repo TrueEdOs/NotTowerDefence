@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from config.database import Database
 
+from SmileScanner.main import Smile
 import config.colors as color
 import hashlib
 
@@ -34,7 +35,18 @@ class Authorization:
 
         self.root.protocol("WM_DELETE_WINDOW", lambda: exit())
         self.db = Database("database", "user_data")
-        self.root.mainloop()
+
+        self.smile = Smile()
+        self.do = True
+        self.start()
+        #self.root.mainloop()
+
+    def start(self):
+        while self.do is True and self.smile.activated is True:
+            self.smile.check_face()
+            self.root.update()
+        self.root.destroy()
+
 
     @staticmethod
     def hash_password(password):
@@ -64,9 +76,10 @@ class Authorization:
         elif not self.password.get():
             messagebox.showinfo("Warning", "Empty password")
         elif self.db.find_user(self.login.get(), self.hash_password(self.password.get())):
+            self.smile.stop()
             self.cur_db = Database(self.login.get(), "settings")
             self.cur_db.load_settings()
-            self.root.destroy()
+            self.do = False
         else:
             messagebox.showinfo("Warning", "Wrong data")
 
